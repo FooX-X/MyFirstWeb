@@ -26,16 +26,6 @@ app.use((req, res, next) => { //doesn't send response just adjusts it
 
 })
 
-
-// app.get('/test/:test', function (req, response) {
-//     const test = req.params.test
-//     const writeObj = {test: test}
-//     db.collection("test").insertOne(writeObj, null, function (err, docs) {
-//         response.status(200);
-//         response.send(JSON.stringify(docs))
-//     });
-// })
-
 app.put('/updateValue', function (req, response) {
     const data = req.body
     db.collection("test").updateOne(data.whatToUpdate, {$set: data.newData}, null, function (err, docs) {
