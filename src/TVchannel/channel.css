@@ -1,0 +1,20 @@
+.channelItem{
+    display: flex;
+    width: 100px;
+    height: 100px;
+    border: 1px solid;
+    margin: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+    .channelItem:hover{
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+    .channelItem > strong{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
