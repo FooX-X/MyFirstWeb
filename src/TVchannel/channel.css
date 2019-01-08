@@ -1,0 +1,25 @@
+.channelItem{
+    display: flex;
+    border: 1px solid;
+    margin: 10px;
+    align-items: center;
+    padding-right: 10px;
+    background-color: rgba(18,204,0,1);
+    color: rgba(255,255,255,1);
+    font-size: 25px;
+}
+    .channelItem:hover{
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    }
+    .channelItem > strong{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    img{
+        height: 50px;
+        width: auto;
+        padding: 10px;
+    }

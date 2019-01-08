@@ -4,6 +4,7 @@ var express = require('express')
 var app = express()
 var db = null;
 var bodyParser = require('body-parser')
+const api = require('./api')
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
@@ -25,41 +26,6 @@ app.use((req, res, next) => { //doesn't send response just adjusts it
     next(); //so that other routes can take over
 
 })
-
-
-// app.get('/test/:test', function (req, response) {
-//     const test = req.params.test
-//     const writeObj = {test: test}
-//     db.collection("test").insertOne(writeObj, null, function (err, docs) {
-//         response.status(200);
-//         response.send(JSON.stringify(docs))
-//     });
-// })
-
-app.put('/updateValue', function (req, response) {
-    const data = req.body
-    db.collection("test").updateOne(data.whatToUpdate, {$set: data.newData}, null, function (err, docs) {
-        response.status(200);
-        response.send(JSON.stringify(docs))
-    })
-})
-
-app.post('/createValue', function (req, response) {
-    const data = req.body
-    db.collection("test").insertOne(req.body, null, function (err, docs) {
-        response.status(200);
-        response.send(JSON.stringify(docs))
-    })
-})
-app.get('/readValue', function (req, response) {
-    const data = req.body
-    db.collection("test").findOne(req.body, null, function (err, docs) {
-        response.status(200);
-        response.send(JSON.stringify(docs))
-    })
-})
-
-
 // Connection URL
 const url = 'mongodb://localhost:27017';
 
@@ -75,6 +41,9 @@ client.connect(function (err) {
     console.log("Connected successfully to server");
 
     db = client.db(dbName);
+
+    api(app, db)
+
     app.listen(2000)
     //client.close();
 });
