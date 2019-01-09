@@ -1,25 +1,27 @@
 import React from 'react';
 import Popup from 'reactjs-popup';
 
-export default () => (
-    <Popup trigger={<button className="button"> Open Modal </button>} modal>
+export default (props) =>{
+let prop = props._this.state.create
+  return (
+    <Popup trigger={<button className="button"> Add New </button>} modal>
       {close => (
         <div className="modal">
-          <div className="header"> Modal Title </div>
+          <div className="header"> Add New Item </div>
           <div className="content">
-            {' '}
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nostrum.
-            Dolorem, repellat quidem ut, minima sint vel eveniet quibusdam voluptates
-            delectus doloremque, explicabo tempore dicta adipisci fugit amet dignissimos?
-            <br />
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sit
-            commodi beatae optio voluptatum sed eius cumque, delectus saepe repudiandae
-            explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae?
+            <div>Name:<input type="text" onChange={props.handleInput.bind(this, prop, 'Name')}/></div>
+            <div>Group:<input type="text" onChange={props.handleInput.bind(this, prop, 'Group')}/></div>
+          <div>Language:<input type="text" onChange={props.handleInput.bind(this, prop, 'Language')}/></div>
+          <div>IP adress:<input type="text" onChange={props.handleInput.bind(this, prop, 'IP_Adress')}/></div>
+          <div>Video_ID:<input type="text" onChange={props.handleInput.bind(this, prop, 'Video_ID')}/></div>
+          <div>Audio_ID:<input type="text" onChange={props.handleInput.bind(this, prop, 'Audio_ID')}/></div>
+          <div>Logo:<input type="file" onChange={props.handleInput.bind(this, prop, 'Logo')}/></div>
           </div>
           <div className="actions">
-            <button onClick={() => {close()}}> close modal </button>
+            <button onClick={props.handleSubmit.bind(this, prop)}>Create new item</button>
+            <button onClick={() => {close()}}> Close </button>
           </div>
         </div>
       )}
     </Popup>
-  )
+  )}

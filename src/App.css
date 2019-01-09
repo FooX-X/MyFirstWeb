@@ -27,16 +27,12 @@ nav button{
   margin-left: 10px;
   margin-bottom: 10px;
 }
-.ItemListing > .fa{
+.ItemListing > .grid, .ItemListing > .list{
   margin: 0 5px ;
   font-size:20px;
 }
 
-.fa.active{
+.active{
   pointer-events: none;
   color: #cccccc;
 }
-/* .fa.disabled{
-  pointer-events: none;
-  color: #cccccc;
-} */
