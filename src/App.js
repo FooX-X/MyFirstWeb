@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Channel from './TVchannel/channel'
-import Popup from './Popup/AddPopup'
+import Popup from './Popup/AddItem/AddItemPopup'
 import './App.css';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
