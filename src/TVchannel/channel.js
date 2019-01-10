@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
 export default (props) =>{
-    let param = props._this;
+    let param = props.element;
     const styleIMG = (`./img/${param.LOGO}`)
     return(
     <div className="channelItem" data-tag={param.GROUP}>

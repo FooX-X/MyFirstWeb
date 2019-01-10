@@ -13,29 +13,40 @@ class App extends Component {
       create: {
           method: 'POST',
           body: {
-              Name: '',
-              Group: '',
-              Language: '',
-              IP_Adress: '',
-              Video_ID: '',
-              Audio_ID: '',
-              Logo: '1234'
+              NAME: '',
+              GROUP: 'Lietuviski',
+              LANGUAGE: 'LT',
+              IP_ADRESS: '',
+              VIDEO_ID: null,
+              AUDIO_ID: null,
+              LOGO: '',
+              UNIQUE_NAME: 'sadasf',
           },
           path: 'createValue'
       },
-
-    rec:[],
+    channelData:[],
+    dropdownData:[],
     addClass: false
   }
 
 componentWillMount () {
-    return fetch('http://localhost:2000/getValues')
+    return( fetch('http://localhost:2000/getValues')
         .then((resp) => resp.json())
         .then((data)=> {
-            this.setState({rec: data})
+            this.setState({channelData: data})
+        }),
+        fetch('http://localhost:2000/getValues2')
+        .then((resp) => resp.json())
+        .then((data)=> {
+            this.setState({dropdownData: data})
+            console.log(this.state.dropdownData)
         })
-}
+        )}
 handleSubmit (obj) {
+  obj.body.VIDEO_ID = parseInt(obj.body.VIDEO_ID)
+  obj.body.AUDIO_ID = parseInt(obj.body.AUDIO_ID)
+  obj.body.LOGO = obj.body.LOGO.substring(obj.body.LOGO.lastIndexOf('\\')+1)
+  console.log(obj.body.LOGO)
   fetch(`http://localhost:2000/${obj.path}`, {
       method: obj.method,
       body: JSON.stringify(obj.body),
@@ -87,24 +98,15 @@ handleInput (obj, key, e) {
           <div onClick={this.toggleClass.bind(this)} className={gridClass.join(' ')}><FontAwesomeIcon icon="th" /></div>
           </div>
           <div className={channelList.join(' ')}>
-          {this.state.rec.map((element,index) =>{
+          {this.state.channelData.map((element,index) =>{
                       return(<Channel key={index}
-                                      _this = {element}/>)
+                                      element = {element}
+                                      />)
                   })}
           </div>
       </div>
     );
   }
-// function gallerySection( target, data ) {
-//   let panaudoti_tagai = [],
-//       kiekis = data.length,
-//       tagas = '',
-//               for ( var i=0; i<kiekis; i++) {
-//                   tagas = data[i].tag.toLowerCase();
-//                   if ( panaudoti_tagai.indexOf(tagas) === -1 ) {
-//                       panaudoti_tagai.push(tagas);
-//                   }
-//               }
-// }
+}
 
 export default App;
