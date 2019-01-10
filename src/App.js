@@ -34,6 +34,7 @@ componentWillMount () {
         .then((resp) => resp.json())
         .then((data)=> {
             this.setState({channelData: data})
+            console.log(this.state.channelData)
         }),
         fetch('http://localhost:2000/getValues2')
         .then((resp) => resp.json())

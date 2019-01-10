@@ -2,8 +2,10 @@ import React from 'react';
 import Popup from 'reactjs-popup';
 
 export default (props) =>{
-let prop = props._this.state.create
-let _this = props._this.state
+  let _this = props._this.state
+  let prop = _this.create
+  let obj = _this.dropdownData
+  console.log(...obj.LANGUAGE[1])
   return (
     <Popup trigger={<button className="button"> Add New </button>} modal>
       {close => (
@@ -12,18 +14,20 @@ let _this = props._this.state
           <div className="content">
             <div>Name:<input type="text" onChange={props.handleInput.bind(this, prop, 'NAME')}/></div>
             <div>Group: 
-              <select onChange={props.handleInput.bind(this, prop, 'GROUP')}>
-                {_this.dropdownData.map((element,index) =>{
-                  return(<option value={element.GROUP}>{element.GROUP}</option>)
+              {/* <select onChange={props.handleInput.bind(this, prop, 'GROUP')}>
+                {GROUP.map((element) =>{
+                  return(<option value={element}>{element}</option>)
                 })}
-              </select>
+              </select> */}
             </div>
             <div>
               Language: 
               <select onChange={props.handleInput.bind(this, prop, 'LANGUAGE')}>
-                {_this.dropdownData.map((element,index) =>{
-                  return(<option value={element.LANGUAGE}>{element.LANGUAGE}</option>)
-                })}
+                {_this.dropdownData.value((element) =>{
+                  element.LANGUAGE.map((element, index) =>{
+                    return(<option value={element}>{element}</option>)
+                  }
+                )})}
             </select>
             </div>
           <div>IP adress:<input type="text" onChange={props.handleInput.bind(this, prop, 'IP_ADRESS')}/></div>
