@@ -25,29 +25,25 @@ class App extends Component {
           path: 'createValue'
       },
     channelData:[],
-    dropdownData:[],
+    group: [],
+    language: [],
     addClass: false
   }
 
   componentWillMount () {
-    this.getDataFromDB()
+    this.getItemListdrobBD()
+    this.getDropDownDataFromDB()
    }
 
-getItemList(){
+getItemListdrobBD(){
   return( fetch('http://localhost:2000/getValues')
         .then((resp) => resp.json())
         .then((data)=> {
             this.setState({channelData: data})
         }))
 }
-getDataFromDB(){
-        return( fetch('http://localhost:2000/getValues')
-        .then((resp) => resp.json())
-        .then((data)=> {
-            this.setState({channelData: data})
-            console.log(this.state.channelData)
-        }),
-        fetch('http://localhost:2000/getValuesGroup')
+getDropDownDataFromDB(){
+        return( fetch('http://localhost:2000/getValuesGroup')
         .then((resp) => resp.json())
         .then((data)=> {
             this.setState({group: data})
@@ -116,7 +112,8 @@ handleInput (obj, key, e) {
           </div>
           <div className={channelList.join(' ')}>
           {this.state.channelData.map((element,index) =>{
-                      return(<Channel key={index}
+                      return(<Channel _this = {this}
+                                      key={index}
                                       element = {element}
                                       />)
                   })}
