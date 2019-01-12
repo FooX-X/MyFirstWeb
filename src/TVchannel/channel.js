@@ -8,7 +8,7 @@ export default (props) =>{
     const styleIMG = (`./img/${param.LOGO}`)
     return(
     <div className="channelItem" data-tag={param.GROUP}>
-        <div className="edit"><Popup _this = {param}/></div>
+        <div className="edit"><Popup _this={props._this} mapParam = {param}/></div>
         <img src={styleIMG} alt={param.NAME}></img>
         <div>{param.NAME}</div>
     </div>

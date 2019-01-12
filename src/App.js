@@ -25,39 +25,55 @@ class App extends Component {
           path: 'createValue'
       },
     channelData:[],
-    dropdownData:[],
+    group:[],
+    language:[],
     addClass: false
   }
 
 componentWillMount () {
-    return( fetch('http://localhost:2000/getValues')
+    this.getDataFromDB()
+   }
+
+getItemList(){
+  return( fetch('http://localhost:2000/getValues')
+        .then((resp) => resp.json())
+        .then((data)=> {
+            this.setState({channelData: data})
+        }))
+}
+getDataFromDB(){
+        return( fetch('http://localhost:2000/getValues')
         .then((resp) => resp.json())
         .then((data)=> {
             this.setState({channelData: data})
             console.log(this.state.channelData)
         }),
-        fetch('http://localhost:2000/getValues2')
+        fetch('http://localhost:2000/getValuesGroup')
         .then((resp) => resp.json())
         .then((data)=> {
-            this.setState({dropdownData: data})
-            console.log(this.state.dropdownData)
+            this.setState({group: data})
+        }),
+        fetch('http://localhost:2000/getValuesLanguage')
+        .then((resp) => resp.json())
+        .then((data)=> {
+            this.setState({language: data})
         })
-        )}
+        )
+}
+
+
 handleSubmit (obj) {
   obj.body.VIDEO_ID = parseInt(obj.body.VIDEO_ID)
   obj.body.AUDIO_ID = parseInt(obj.body.AUDIO_ID)
   obj.body.LOGO = obj.body.LOGO.substring(obj.body.LOGO.lastIndexOf('\\')+1)
-  console.log(obj.body.LOGO)
   fetch(`http://localhost:2000/${obj.path}`, {
       method: obj.method,
       body: JSON.stringify(obj.body),
       headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json'
-          
+          'Content-Type': 'application/json'  
       }
   }).then(response => {
-      //After post
   })
 }
 
@@ -92,7 +108,7 @@ handleInput (obj, key, e) {
             <button>Serch</button>
           </div>
           <div className="FilterList">
-            <div>filter by type</div>
+            {/* <Navigation _this ={this}/> */}
           </div>
           <div className="ItemListing">                    
           <div onClick={this.toggleClass.bind(this)} className={listClass.join(' ')}><FontAwesomeIcon  icon="list" /></div>
@@ -100,7 +116,8 @@ handleInput (obj, key, e) {
           </div>
           <div className={channelList.join(' ')}>
           {this.state.channelData.map((element,index) =>{
-                      return(<Channel key={index}
+                      return(<Channel _this ={this}
+                                      key={index}
                                       element = {element}
                                       />)
                   })}
