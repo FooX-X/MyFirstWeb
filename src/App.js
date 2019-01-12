@@ -29,20 +29,36 @@ class App extends Component {
     addClass: false
   }
 
-componentWillMount () {
-    return( fetch('http://localhost:2000/getValues')
+  componentWillMount () {
+    this.getDataFromDB()
+   }
+
+getItemList(){
+  return( fetch('http://localhost:2000/getValues')
+        .then((resp) => resp.json())
+        .then((data)=> {
+            this.setState({channelData: data})
+        }))
+}
+getDataFromDB(){
+        return( fetch('http://localhost:2000/getValues')
         .then((resp) => resp.json())
         .then((data)=> {
             this.setState({channelData: data})
             console.log(this.state.channelData)
         }),
-        fetch('http://localhost:2000/getValues2')
+        fetch('http://localhost:2000/getValuesGroup')
         .then((resp) => resp.json())
         .then((data)=> {
-            this.setState({dropdownData: data})
-            console.log(this.state.dropdownData)
+            this.setState({group: data})
+        }),
+        fetch('http://localhost:2000/getValuesLanguage')
+        .then((resp) => resp.json())
+        .then((data)=> {
+            this.setState({language: data})
         })
-        )}
+        )
+}
 handleSubmit (obj) {
   obj.body.VIDEO_ID = parseInt(obj.body.VIDEO_ID)
   obj.body.AUDIO_ID = parseInt(obj.body.AUDIO_ID)
