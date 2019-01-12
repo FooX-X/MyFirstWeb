@@ -1,7 +1,8 @@
 module.exports = function (app, db) {
 
     app.get('/getValues', function (req, response) {
-        db.collection("mainDB").find({}).toArray (function (err, docs) {
+        let group = req.query.group;
+        db.collection("mainDB").find({GROUP:  new RegExp(group)}).toArray (function (err, docs) {
             response.status(200);
             response.send(JSON.stringify(docs))
         });
