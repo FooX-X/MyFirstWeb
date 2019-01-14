@@ -1,3 +1,25 @@
+.channelList{
+    display: flex;
+    flex-flow: wrap;
+    align-content: space-between;
+  }
+  .channelList.line{
+    flex-flow: column;
+    width: 100%
+  }
+  .ItemListing{
+    display: flex;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  .ItemListing > .grid, .ItemListing > .list{
+    margin: 0 5px ;
+    font-size:20px;
+  }
+    .active{
+        pointer-events: none;
+        color: #cccccc;
+    }
 .channelItem{
     position: relative;
     display: flex;
@@ -9,6 +31,11 @@
     color: rgba(255,255,255,1);
     font-size: 25px;
 }
+
+.channelItem.checked {
+    background-color: red;
+}
+
     .channelItem > .edit {
         padding-top: 7px;	
         padding-right: 7px;
@@ -22,10 +49,15 @@
     .channelItem:hover{
         cursor: pointer;
         box-shadow: 0 0 20px rgba(0,0,0,0.8);
+
     }
 
     .channelItem:hover > .edit{
-        display: block;
+        display: inline-block;
+        position: absolute;
+        width: 50px;
+        width: 20px;
+        z-index: 99;
     }
 
     .channelItem > strong{

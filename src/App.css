@@ -14,25 +14,3 @@ nav button{
 .FilterList{
   padding:10px 0;
 }
-.channelList{
-  display: flex;
-  flex-flow: wrap;
-  align-content: space-between;
-}
-.channelList.line{
-  flex-flow: column;
-}
-.ItemListing{
-  display: flex;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-.ItemListing > .grid, .ItemListing > .list{
-  margin: 0 5px ;
-  font-size:20px;
-}
-
-.active{
-  pointer-events: none;
-  color: #cccccc;
-}
